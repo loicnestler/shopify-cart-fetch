@@ -149,10 +149,10 @@ export class ShopifyCart implements CartInterface {
 
   protected async post<Return>(route: CartRoute, data?: Record<string, unknown>): Promise<Return> {
     const url = this._settings.url + route;
-    const postConfig = this._settings.postConfig;
+    const { body, ...postConfig } = this._settings.postConfig;
     if (data) {
       (postConfig as { body: BodyInit }).body = JSON.stringify({
-        ...(postConfig.body as Record<string, unknown>),
+        ...(body as Record<string, unknown>),
         ...data,
       });
     }
