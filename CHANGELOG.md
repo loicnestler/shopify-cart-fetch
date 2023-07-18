@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.0.0 (2023-07-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed individual function exports
+
+### :memo: Build System
+
+* added lint test to scripts ([c2de4b6](https://github.com/loicnestler/shopify-cart-fetch/commit/c2de4b69f51c43b31de070622480861b48a2da23))
+* dist files added ([495ca30](https://github.com/loicnestler/shopify-cart-fetch/commit/495ca30e8b60d64bad76383536294bf18ca02e54))
+* github workflows added ([cf00843](https://github.com/loicnestler/shopify-cart-fetch/commit/cf008433a97bd3e9fb1191301a68ac59c6a1acc0))
+* switched webpack to rollup for builds ([858971f](https://github.com/loicnestler/shopify-cart-fetch/commit/858971f68a7a6bdd7a5c4679c972de2b2c86e9e0))
+
+
+### Tests
+
+* excluded e2e tests ([0376ad7](https://github.com/loicnestler/shopify-cart-fetch/commit/0376ad7189808df6443c85226ed538fd81d84239))
+
+
+### :rocket: Features
+
+* added support for defining default post body content ([455116b](https://github.com/loicnestler/shopify-cart-fetch/commit/455116ba927a9880683ee1906b141a0eeac2ea87))
+* all methods for Shopify API implemented ([57ece50](https://github.com/loicnestler/shopify-cart-fetch/commit/57ece50e310f46c5ff365049f1f6c4799765f4ef))
+* events added for all cart methods ([21e2465](https://github.com/loicnestler/shopify-cart-fetch/commit/21e24650fe4bec7569bc506aa016e0f991230f06))
+* get cart state ([1f423ca](https://github.com/loicnestler/shopify-cart-fetch/commit/1f423ca27f413e74409602cad282de5ac49eea11))
+* refactoring and unit tests ([5a48923](https://github.com/loicnestler/shopify-cart-fetch/commit/5a48923679e1835d50125a9562d892ba01af077c))
+
+
+### :bug: Bug Fixes
+
+* fixed sending body on GET / HEAD requests ([4454255](https://github.com/loicnestler/shopify-cart-fetch/commit/44542555bf848a138e610f322baf3e8ccd145bd4))
+* updated return types and added exceptions ([e44cebd](https://github.com/loicnestler/shopify-cart-fetch/commit/e44cebd562c7e3b27cc56544c50e20226270cc7c))
+
 ### [2.0.1](https://github.com/hayes0724/shopify-cart-fetch/compare/v2.0.0...v2.0.1) (2022-02-06)
 
 
