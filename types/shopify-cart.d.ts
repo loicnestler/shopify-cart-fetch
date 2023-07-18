@@ -1,5 +1,5 @@
-import { CartInterface } from "./lib/cart-interface";
-import { Attributes, CartEvents, CartItemRemove, CartItems, CartItemsResponse, CartItemUpdate, CartLineItem, CartRoute, CartSettings, CartState, ShopifyResponse } from "./lib/types";
+import { CartInterface } from './lib/cart-interface';
+import { Attributes, CartEvents, CartItemRemove, CartItems, CartItemsResponse, CartItemUpdate, CartLineItem, CartRoute, CartSettings, CartState, ShopifyResponse } from './lib/types';
 export declare class ShopifyCart implements CartInterface {
     private _state;
     private readonly _settings;
@@ -59,7 +59,7 @@ export declare class ShopifyCart implements CartInterface {
      * @see {@link https://shopify.dev/docs/themes/liquid/reference/objects/cart#cart-note | ShopifyAPI: cart.note }
      */
     updateNote(note: string): Promise<CartState>;
-    protected post<Return>(route: CartRoute, data?: BodyInit): Promise<Return>;
+    protected post<Return>(route: CartRoute, data?: Record<string, unknown>): Promise<Return>;
     protected checkResponse(response: ShopifyResponse): void;
     protected clearProps(target: Record<string, unknown>): {
         [key: string]: '';

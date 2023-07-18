@@ -2,7 +2,7 @@
  * The current cart object from Shopify
  * https://shopify.dev/docs/themes/ajax-api/reference/cart#get-cart-js
  */
-import { ShopifyError } from "./errors";
+import { ShopifyError } from './errors';
 export declare type CartState = {
     readonly token: string;
     readonly note: string;
@@ -154,10 +154,12 @@ export declare type LineItemProperties = {
  * Shopify cart API routes
  * @see {@link https://shopify.dev/docs/themes/ajax-api/reference/cart | ShopifyAPI: cart }
  */
-export declare type CartRoute = "/cart.js" | "/cart/add.js" | "/cart/update.js" | "/cart/change.js" | "/cart/clear.js" | "/cart/shipping_rates.json" | "/cart/prepare_shipping_rates.json" | "/cart/async_shipping_rates.json";
+export declare type CartRoute = '/cart.js' | '/cart/add.js' | '/cart/update.js' | '/cart/change.js' | '/cart/clear.js' | '/cart/shipping_rates.json' | '/cart/prepare_shipping_rates.json' | '/cart/async_shipping_rates.json';
 export declare type CartSettings = {
     readonly url?: string;
-    readonly postConfig?: RequestInit;
+    readonly postConfig?: RequestInit & {
+        body?: Record<string, unknown>;
+    };
     readonly updateState?: boolean;
 };
 export declare type ShopifyResponse = CartState | CartItemsResponse | ShopifyError;

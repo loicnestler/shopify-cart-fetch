@@ -1,14 +1,18 @@
-import {CartInterface} from "./lib/cart-interface";
+import { CartInterface } from './lib/cart-interface';
 import {
-  Attributes, CartEvents,
+  Attributes,
+  CartEvents,
   CartItemRemove,
   CartItems,
-  CartItemsResponse, CartItemUpdate,
-  CartLineItem, CartRoute,
+  CartItemsResponse,
+  CartItemUpdate,
+  CartLineItem,
+  CartRoute,
   CartSettings,
-  CartState, ShopifyResponse
-} from "./lib/types";
-import {InventoryError, VariantError} from "./lib/errors";
+  CartState,
+  ShopifyResponse,
+} from './lib/types';
+import { InventoryError, VariantError } from './lib/errors';
 
 export class ShopifyCart implements CartInterface {
   private _state: CartState;
@@ -56,7 +60,7 @@ export class ShopifyCart implements CartInterface {
    */
   public async addItem(items: CartItems): Promise<CartItemsResponse> {
     const data = Array.isArray(items) ? items : [items];
-    const response = await this.post('/cart/add.js', JSON.stringify({ items: data }));
+    const response = await this.post('/cart/add.js', { items: data });
     if (this._settings.updateState) {
       await this.getState();
     }
@@ -73,7 +77,7 @@ export class ShopifyCart implements CartInterface {
     if (!formData.get('id')) {
       throw 'Cart form missing required property ID';
     }
-    const formJson = JSON.stringify(Object.fromEntries(formData.entries()));
+    const formJson = Object.fromEntries(formData.entries());
     const response = await this.post('/cart/add.js', formJson);
     if (this._settings.updateState) {
       await this.getState();
@@ -88,9 +92,9 @@ export class ShopifyCart implements CartInterface {
    */
   public async clearAttributes(): Promise<CartState> {
     const state = await this.getState();
-    const data = JSON.stringify({
+    const data = {
       attributes: this.clearProps(state.attributes),
-    });
+    };
     return await this.post('/cart/update.js', data);
   }
 
@@ -107,7 +111,7 @@ export class ShopifyCart implements CartInterface {
    * @see {@link https://shopify.dev/docs/themes/liquid/reference/objects/cart#cart-note | ShopifyAPI: cart.note }
    */
   public async clearNote(): Promise<CartState> {
-    return await this.post('/cart/update.js', JSON.stringify({ note: '' }));
+    return await this.post('/cart/update.js', { note: '' });
   }
 
   /**
@@ -115,7 +119,7 @@ export class ShopifyCart implements CartInterface {
    * @see {@link https://shopify.dev/docs/themes/ajax-api/reference/cart#post-cart-change-js | ShopifyAPI: POST /cart/change.js }
    */
   public async removeItem(item: CartItemRemove): Promise<CartState> {
-    return await this.post('/cart/change.js', JSON.stringify({ quantity: 0, ...item }));
+    return await this.post('/cart/change.js', { quantity: 0, ...item });
   }
 
   /**
@@ -123,7 +127,7 @@ export class ShopifyCart implements CartInterface {
    * @see {@link https://shopify.dev/docs/themes/liquid/reference/objects/cart#cart-attributes | ShopifyAPI: cart-attributes }
    */
   public async updateAttributes(attributes: Attributes): Promise<CartState> {
-    return await this.post('/cart/update.js', JSON.stringify({ attributes: { ...attributes } }));
+    return await this.post('/cart/update.js', { attributes: { ...attributes } });
   }
 
   /**
@@ -132,7 +136,7 @@ export class ShopifyCart implements CartInterface {
    * @see {@link https://shopify.dev/docs/themes/ajax-api/reference/cart#post-cart-change-js | ShopifyAPI: POST /cart/change.js }
    */
   public async updateItem(item: CartItemUpdate): Promise<CartState> {
-    return await this.post('/cart/change.js', JSON.stringify(item));
+    return await this.post('/cart/change.js', item);
   }
 
   /**
@@ -140,14 +144,17 @@ export class ShopifyCart implements CartInterface {
    * @see {@link https://shopify.dev/docs/themes/liquid/reference/objects/cart#cart-note | ShopifyAPI: cart.note }
    */
   public async updateNote(note: string): Promise<CartState> {
-    return await this.post('/cart/update.js', JSON.stringify({ note: note }));
+    return await this.post('/cart/update.js', { note: note });
   }
 
-  protected async post<Return>(route: CartRoute, data?: BodyInit): Promise<Return> {
+  protected async post<Return>(route: CartRoute, data?: Record<string, unknown>): Promise<Return> {
     const url = this._settings.url + route;
     const postConfig = this._settings.postConfig;
     if (data) {
-      postConfig.body = data;
+      (postConfig as { body: BodyInit }).body = JSON.stringify({
+        ...(postConfig.body as Record<string, unknown>),
+        ...data,
+      });
     }
     this.cartEvent('cart:requestStarted', route);
     const request = await fetch(url, postConfig);

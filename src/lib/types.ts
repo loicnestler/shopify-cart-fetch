@@ -2,7 +2,7 @@
  * The current cart object from Shopify
  * https://shopify.dev/docs/themes/ajax-api/reference/cart#get-cart-js
  */
-import {ShopifyError} from "./errors";
+import { ShopifyError } from './errors';
 
 export type CartState = {
   readonly token: string;
@@ -125,9 +125,9 @@ export type CartItemUpdate = {
 
 export type CartItemRemove = { id: CartItemPropertyID } | { line: CartItemIndex };
 
-export type CartItems = CartItemAdd[] | CartItemAdd
+export type CartItems = CartItemAdd[] | CartItemAdd;
 
-export type CartItemsResponse = { items: CartLineItem[] }
+export type CartItemsResponse = { items: CartLineItem[] };
 
 /**
  * The id value is the line item's variant_id or the line item's key.
@@ -164,21 +164,21 @@ export type LineItemProperties = {
  * @see {@link https://shopify.dev/docs/themes/ajax-api/reference/cart | ShopifyAPI: cart }
  */
 export type CartRoute =
-  | "/cart.js"
-  | "/cart/add.js"
-  | "/cart/update.js"
-  | "/cart/change.js"
-  | "/cart/clear.js"
-  | "/cart/shipping_rates.json"
-  | "/cart/prepare_shipping_rates.json"
-  | "/cart/async_shipping_rates.json";
+  | '/cart.js'
+  | '/cart/add.js'
+  | '/cart/update.js'
+  | '/cart/change.js'
+  | '/cart/clear.js'
+  | '/cart/shipping_rates.json'
+  | '/cart/prepare_shipping_rates.json'
+  | '/cart/async_shipping_rates.json';
 
 export type CartSettings = {
   readonly url?: string;
-  readonly postConfig?: RequestInit;
+  readonly postConfig?: RequestInit & { body?: Record<string, unknown> };
   readonly updateState?: boolean;
 };
 
-export type ShopifyResponse = CartState | CartItemsResponse | ShopifyError
+export type ShopifyResponse = CartState | CartItemsResponse | ShopifyError;
 
-export type CartEvents = 'cart:requestStarted' | 'cart:requestComplete' | 'cart:ready'
+export type CartEvents = 'cart:requestStarted' | 'cart:requestComplete' | 'cart:ready';
