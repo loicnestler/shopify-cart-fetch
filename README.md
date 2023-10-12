@@ -1,5 +1,7 @@
 # Shopify Cart Fetch
 
+> A fork of Eric Hayes's [shopify-cart-fetch](https://github.com/hayes0724/shopify-cart-fetch/)
+
 Shopify Cart API with zero dependencies, written in TypeScript, and under 1kb gzipped.
 
 # Documentation

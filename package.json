@@ -1,15 +1,15 @@
 {
   "name": "shopify-cart-fetch",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Shopify Cart API with zero dependencies, TypeScript, lightweight and modular",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "types": "types/index.es.d.ts",
-  "typings": "types/index.es.d.ts",
-  "browser": "dist/index.min.js",
-  "jsdelivr": "dist/index.min.js",
-  "unpkg": "dist/index.min.js",
-  "author": "Eric Hayes",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "browser": "dist/index.js",
+  "jsdelivr": "dist/index.js",
+  "unpkg": "dist/index.js",
+  "author": "Loîc Nestler",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "scripts": {
     "test": "jest",
     "watch": "tsc -w",
-    "build": "tsc && rollup -c",
+    "build": "bun x bunfile@0.1.8",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "docs": "typedoc",
     "release": "standard-version"
